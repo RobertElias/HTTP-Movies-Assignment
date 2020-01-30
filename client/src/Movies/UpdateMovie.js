@@ -3,24 +3,24 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const initialItem = {
-  name: "",
-  price: "",
-  imageUrl: "",
-  description: "",
-  shipping: ""
+  id: "",
+  title: "",
+  director: "",
+  metascore: "",
+  stars: []
 };
 
 const UpdateMovie = props => {
-  const [item, setItem] = useState(initialItem);
+  const [movie, setMovie] = useState(initialItem);
   const { id } = useParams();
 
   useEffect(() => {
-    const itemToUpdate = props.items.find(thing => `${thing.id}` === id);
+    const movieToUpdate = props.movies.find(thing => `${thing.id}` === id);
 
-    if (itemToUpdate) {
-      setItem(itemToUpdate);
+    if (movieToUpdate) {
+      setItem(movieToUpdate);
     }
-  }, [props.items, id]);
+  }, [props.movies, id]);
 
   const changeHandler = ev => {
     ev.persist();
@@ -29,22 +29,22 @@ const UpdateMovie = props => {
       value = parseInt(value, 10);
     }
 
-    setItem({
-      ...item,
+    setMovie({
+      ...movie,
       [ev.target.name]: value
     });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    // make a PUT request to edit the item
+    // make a PUT request to edit the movie
     axios
-      .put(`http://localhost:3333/items/${id}`, item)
+      .put(`http://localhost:5000/movies/${id}`, movie)
       .then(res => {
         // res.data is the FULL array with the updated item
         // That's not always the case. Sometimes you need to build your
         // own updated array
-        props.setItems(res.data);
+        props.setMovies(res.data);
         props.history.push(`/item-list/${id}`);
       })
       .catch(err => console.log(err));
