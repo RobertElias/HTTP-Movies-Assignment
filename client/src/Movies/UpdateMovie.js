@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, withRouter } from "react-router-dom";
 import axios from "axios";
 
 const UpdateMovie = props => {
-  
+  const {refresh, setRefresh} = props;  
   const { id } = useParams();
-  const [movie, setMovie]= useState({});
-  useEffect(()=>{
+  const [movie, setMovie] = useState({});
+  useEffect(() => {
     axios
-    .get(`http://localhost:5000/api/movies/${id}`)
-    .then(res => {
-      console.log(res.data) 
-      setMovie(res.data)
-    })
-    .catch(error => console.log(error));
-}, []);
-
+      .get(`http://localhost:5000/api/movies/${id}`)
+      .then(res => {
+        console.log(res.data);
+        setMovie(res.data);
+      })
+      .catch(error => console.log(error));
+  }, []);
 
   const changeHandler = ev => {
     ev.persist();
@@ -27,11 +26,11 @@ const UpdateMovie = props => {
   };
 
   const handleSubmit = e => {
-      console.log(movie);
+    console.log(movie);
     e.preventDefault();
     // make a PUT request to edit the movie
     axios
-      .put(`http://localhost:5000/movies/${id}`, movie)
+      .put(`http://localhost:5000/api/movies/${id}`, movie)
       .then(res => {
         // res.data is the FULL array with the updated item
         // That's not always the case. Sometimes you need to build your
@@ -42,6 +41,19 @@ const UpdateMovie = props => {
       .catch(err => console.log(err));
   };
 
+  const handleDelete = () => {
+    axios
+        .delete(`http://localhost:5000/api/movies/${id}`)
+        .then(res => {
+            props.history.push(`/`)
+        })
+        .catch(err => console.log(err))
+        .finally(()=>{
+            setRefresh(!refresh);
+        })
+  }
+  
+  
   return (
     <div>
       <h2>Update Movie</h2>
@@ -87,9 +99,12 @@ const UpdateMovie = props => {
         <div className="baseline" />
 
         <button className="md-button form-button">Update Movie</button>
+        
       </form>
+
+      <button onClick={handleDelete} className="md-button form-button">Delete Movie</button>
     </div>
   );
 };
 
-export default UpdateMovie;
+export default withRouter(UpdateMovie);

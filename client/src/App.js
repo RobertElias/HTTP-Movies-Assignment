@@ -7,6 +7,9 @@ import UpdateMovie from "./Movies/UpdateMovie";
 import axios from "axios";
 
 const App = () => {
+
+  const [refresh, setRefresh] = useState(true);
+
   const [savedList, setSavedList] = useState([]);
 
   const addToSavedList = movie => {
@@ -27,7 +30,7 @@ const App = () => {
         setMovies(res.data)
       })
       .catch(error => console.log(error));
-  }, []);
+  }, [refresh]);
 
   return (
     <>
@@ -42,9 +45,9 @@ const App = () => {
         </Route>
       
       <Route
-        path="/update-movie/:id"        
+        path="/update-movie/:id" 
       >
-        <UpdateMovie />
+        <UpdateMovie refresh={refresh} setRefresh={setRefresh} />
       </Route>
     </>
   );

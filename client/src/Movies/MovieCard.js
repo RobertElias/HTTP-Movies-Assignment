@@ -1,10 +1,17 @@
 import React from 'react';
-import UpdateMovie from './UpdateMovie';
+import {
+  withRouter
+} from 'react-router-dom'
+
 
 
 const MovieCard = props => {
-  console.log(props);
-  const { title, director, metascore, stars } = props.movie;
+  const { title, director, metascore, stars, id } = props.movie;
+ 
+  const handleUpdate = () =>{
+    props.history.push(`/update-movie/${id}`)
+}
+
   return (
     <div className="movie-card">
       <h2>{title}</h2>
@@ -21,9 +28,9 @@ const MovieCard = props => {
           {star}
         </div>
       ))}
-      <button>Update Movie</button>
+      <button onClick={handleUpdate} >Update Details</button>
     </div>
   );
 };
 
-export default MovieCard;
+export default withRouter(MovieCard);
