@@ -65,20 +65,20 @@ const UpdateMovie = props => {
         <div className="baseline" />
 
         <input
-          type="number"
-          name="price"
+          type="text"
+          name="Movie Director"
           onChange={changeHandler}
-          placeholder="Price"
-          value={movie.price}
+          placeholder="Director"
+          value={movie.director}
         />
         <div className="baseline" />
 
         <input
-          type="string"
-          name="imageUrl"
+          type="text"
+          name="Meta Score"
           onChange={changeHandler}
-          placeholder="Image"
-          value={movie.imageUrl}
+          placeholder="Meta Score"
+          value={movie.metascore}
         />
         <div className="baseline" />
 
@@ -91,16 +91,10 @@ const UpdateMovie = props => {
         />
         <div className="baseline" />
 
-        <input
-          type="string"
-          name="shipping"
-          onChange={changeHandler}
-          placeholder="Shipping"
-          value={movie.shipping}
-        />
+        
         <div className="baseline" />
 
-        <button className="md-button form-button">Update</button>
+        <button className="md-button form-button">Update Actors</button>
       </form>
     </div>
   );
