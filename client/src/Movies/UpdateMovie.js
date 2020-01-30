@@ -18,7 +18,7 @@ const UpdateMovie = props => {
     const movieToUpdate = props.movies.find(thing => `${thing.id}` === id);
 
     if (movieToUpdate) {
-      setItem(movieToUpdate);
+        setMovie(movieToUpdate);
     }
   }, [props.movies, id]);
 
@@ -52,15 +52,15 @@ const UpdateMovie = props => {
 
   return (
     <div>
-      <h2>Update Item</h2>
+      <h2>Update Movie</h2>
 
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="name"
+          name="Movie Title"
           onChange={changeHandler}
           placeholder="name"
-          value={item.name}
+          value={movie.title}
         />
         <div className="baseline" />
 
@@ -69,7 +69,7 @@ const UpdateMovie = props => {
           name="price"
           onChange={changeHandler}
           placeholder="Price"
-          value={item.price}
+          value={movie.price}
         />
         <div className="baseline" />
 
@@ -78,7 +78,7 @@ const UpdateMovie = props => {
           name="imageUrl"
           onChange={changeHandler}
           placeholder="Image"
-          value={item.imageUrl}
+          value={movie.imageUrl}
         />
         <div className="baseline" />
 
@@ -87,7 +87,7 @@ const UpdateMovie = props => {
           name="description"
           onChange={changeHandler}
           placeholder="Description"
-          value={item.description}
+          value={movie.description}
         />
         <div className="baseline" />
 
@@ -96,7 +96,7 @@ const UpdateMovie = props => {
           name="shipping"
           onChange={changeHandler}
           placeholder="Shipping"
-          value={item.shipping}
+          value={movie.shipping}
         />
         <div className="baseline" />
 
