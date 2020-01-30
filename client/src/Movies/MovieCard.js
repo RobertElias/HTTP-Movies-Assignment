@@ -1,6 +1,9 @@
 import React from 'react';
+import UpdateMovie from './UpdateMovie';
+
 
 const MovieCard = props => {
+  console.log(props);
   const { title, director, metascore, stars } = props.movie;
   return (
     <div className="movie-card">
@@ -18,6 +21,7 @@ const MovieCard = props => {
           {star}
         </div>
       ))}
+      <button>Update Movie</button>
     </div>
   );
 };
